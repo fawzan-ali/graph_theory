@@ -10,4 +10,4 @@ bool isGraphicHavel(std::vector<int> d);
 // checks if given vector represents a graphic sequence using the Erdős–Gallai theorem
 bool isGraphicErdos(std::vector<int> const &d);
 // returns the minimum of two unsigned ints (if equal, returns first)
-unsigned int min(unsigned int const &first, unsigned int const &second);
+unsigned min(unsigned const &first, unsigned const &second);

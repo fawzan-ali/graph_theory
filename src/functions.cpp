@@ -1,7 +1,7 @@
 #include "../includes/functions.hpp"
 
 #include <fstream>
-#include <bits/stdc++.h>
+#include <algorithm>
 #include <cstdlib>
 
 std::vector<int> degrees(std::string &filename) {
@@ -27,7 +27,7 @@ bool isGraphicHavel(std::vector<int> d) {
     }
     std::vector<int> d_prime;
     if (d.size() > 1) {
-        for (int i = 1; i < d.size(); ++i) {
+        for (auto i = unsigned(1); i < d.size(); ++i) {
             if (i < d_1 + 1) {
                 d_prime.push_back(d.at(i) - 1);
             } else {
@@ -40,25 +40,25 @@ bool isGraphicHavel(std::vector<int> d) {
     }
     return false;
 }
-unsigned int min(unsigned int const &first, unsigned int const &second) {
+unsigned min(unsigned const &first, unsigned const &second) {
     if (second < first) {
         return second;
     }
     return first;
 }
 bool isGraphicErdos(std::vector<int> const &d) {
-    unsigned int sum = 0;
-    unsigned int n = d.size();
-    for (unsigned int i = 0; i < n; ++i) {
+    auto sum = unsigned(0);
+    auto n = d.size();
+    for (auto i = unsigned(0); i < n; ++i) {
         sum += abs(d.at(i));
     }
-    for (unsigned int k = 0; k < n; ++k) {
-        unsigned LHS = 0;
-        unsigned RHS = 0;
-        for (unsigned int i = 0; i < k; ++i) {
+    for (auto k = unsigned(0); k < n; ++k) {
+        auto LHS = unsigned(0);
+        auto RHS = unsigned(0);
+        for (auto i = unsigned(0); i < k; ++i) {
             LHS += abs(d.at(i));
         }
-        for (unsigned int i = k; i < n; ++i) {
+        for (auto i = k; i < n; ++i) {
             RHS += min(abs(d.at(i)), k);
         }
         RHS += k * (k + 1);
