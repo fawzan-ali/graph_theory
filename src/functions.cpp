@@ -1,8 +1,8 @@
 #include "../includes/functions.hpp"
+#include "../includes/utilities.hpp"
 
 #include <fstream>
 #include <algorithm>
-#include <cstdlib>
 
 std::vector<int> degrees(std::string &filename) {
     std::vector<int> degrees;
@@ -15,7 +15,7 @@ std::vector<int> degrees(std::string &filename) {
     file.close();
     return degrees;
 }
-bool isGraphicHavel(std::vector<int> d) {
+bool isGraphicHavel(std::vector<int> &d) {
     std::sort(d.rbegin(), d.rend());
     auto d_1 = d.at(0);
     auto d_n = d.at(d.size() - 1);
@@ -40,13 +40,8 @@ bool isGraphicHavel(std::vector<int> d) {
     }
     return false;
 }
-unsigned min(unsigned const &first, unsigned const &second) {
-    if (second < first) {
-        return second;
-    }
-    return first;
-}
-bool isGraphicErdos(std::vector<int> const &d) {
+bool isGraphicErdos(std::vector<int> &d) {
+    std::sort(d.rbegin(), d.rend());
     auto sum = unsigned(0);
     auto n = d.size();
     for (auto i = unsigned(0); i < n; ++i) {
@@ -70,4 +65,17 @@ bool isGraphicErdos(std::vector<int> const &d) {
         return true;
     }
     return false;
+}
+bool isPotentiallyConnected(std::vector<int> &d) {
+    std::sort(d.rbegin(), d.rend());
+    auto d_n = static_cast<unsigned>(d.at(d.size() - 1));
+    auto n = d.size();
+    auto sum = unsigned(0);
+    for (auto i = unsigned(0); i < n; ++i) {
+        sum += abs(d.at(i));
+    }
+    if (!isGraphicErdos(d) || d_n == 0 || sum < (2 * n)) {
+        return false;
+    }
+    return true;
 }
