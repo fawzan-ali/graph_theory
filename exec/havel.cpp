@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-int main(int argc, char** argv) {
+int main() {
     std::vector<int> sequence = {1,2,3,4,5,6,7,8,9,9,9,9,9,9};
     if (sequence.at(0) >= sequence.size()) {
         std::cout << "Sequence is not graphic." << std::endl;
