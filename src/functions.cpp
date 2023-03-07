@@ -1,20 +1,8 @@
 #include "../includes/functions.hpp"
 #include "../includes/utilities.hpp"
 
-#include <fstream>
 #include <algorithm>
 
-std::vector<int> degrees(std::string &filename) {
-    std::vector<int> degrees;
-    std::ifstream file;
-    file.open(filename);
-    std::string number;
-    while(std::getline(file, number, ',')){
-        degrees.push_back(std::stoi(number));
-    }  
-    file.close();
-    return degrees;
-}
 bool isGraphicHavel(std::vector<int> &d) {
     std::sort(d.rbegin(), d.rend());
     auto d_1 = d.at(0);
@@ -39,43 +27,4 @@ bool isGraphicHavel(std::vector<int> &d) {
         }
     }
     return false;
-}
-bool isGraphicErdos(std::vector<int> &d) {
-    std::sort(d.rbegin(), d.rend());
-    auto sum = unsigned(0);
-    auto n = d.size();
-    for (auto i = unsigned(0); i < n; ++i) {
-        sum += abs(d.at(i));
-    }
-    for (auto k = unsigned(0); k < n; ++k) {
-        auto LHS = unsigned(0);
-        auto RHS = unsigned(0);
-        for (auto i = unsigned(0); i < k; ++i) {
-            LHS += abs(d.at(i));
-        }
-        for (auto i = k; i < n; ++i) {
-            RHS += min(abs(d.at(i)), k);
-        }
-        RHS += k * (k + 1);
-        if (LHS > RHS) {
-            return false;
-        }
-    }
-    if ((sum % 2) == 0) {
-        return true;
-    }
-    return false;
-}
-bool isPotentiallyConnected(std::vector<int> &d) {
-    std::sort(d.rbegin(), d.rend());
-    auto d_n = static_cast<unsigned>(d.at(d.size() - 1));
-    auto n = d.size();
-    auto sum = unsigned(0);
-    for (auto i = unsigned(0); i < n; ++i) {
-        sum += abs(d.at(i));
-    }
-    if (!isGraphicErdos(d) || d_n == 0 || sum < (2 * n)) {
-        return false;
-    }
-    return true;
 }
