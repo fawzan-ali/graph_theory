@@ -1,9 +1,8 @@
 #include "../includes/functions.hpp"
-#include "../includes/utilities.hpp"
 
 #include <algorithm>
 
-bool isGraphicHavel(std::vector<int> &d) {
+bool isGraphicHavel(std::vector<int> d) {
     std::sort(d.rbegin(), d.rend());
     auto d_1 = d.at(0);
     auto d_n = d.at(d.size() - 1);
