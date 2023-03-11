@@ -18,6 +18,7 @@ bool isGraphicHavel(std::vector<int> d) {
 	    d_prime.push_back(d.at(i) - 1);
         else 
             d_prime.push_back(d.at(i));
+    }
     if (isGraphicHavel(d_prime))
         return true;
     return false;
