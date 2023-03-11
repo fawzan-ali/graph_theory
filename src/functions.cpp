@@ -36,9 +36,9 @@ std::vector<std::vector<int>> PruferToAdj(std::vector<int> prufer) {
 		while (degrees.at(least_leaf) != 1) {
 			++least_leaf;
 		}
-		tree.at(i).at(least_leaf) = 1;
-		tree.at(least_leaf).at(i) = 1;
-		--degrees.at(i);
+		tree.at(prufer.at(i)).at(least_leaf) = 1;
+		tree.at(least_leaf).at(prufer.at(i)) = 1;
+		--degrees.at(prufer.at(i));
 		--degrees.at(least_leaf);	
 	}
 	int last_leaf = 0;

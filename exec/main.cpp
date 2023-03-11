@@ -13,7 +13,7 @@ int main() {
 //    } else {
 //        std::cout << "Sequence is not graphic." << std::endl;
 //    }
-	std::vector<int> prufer = {0,1,2};
+	std::vector<int> prufer = {3,3,3,4};
 	std::vector<std::vector<int>> tree = PruferToAdj(prufer);
 	for (unsigned int i = 0; i < tree.size(); ++i) {
 		for (unsigned int j = 0; j < tree.at(i).size(); ++j) {
