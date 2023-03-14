@@ -12,14 +12,12 @@ bool isGraphicHavel(std::vector<int> d) {
         	return false;
 	if (d_1 == 0)
         	return true;
-	std::vector<int> d_prime;
-	for (auto i = unsigned(1); i < d.size(); ++i) {
-		if (i < d_1 + 1)
-			d_prime.push_back(d.at(i) - 1);
-		else 
-			d_prime.push_back(d.at(i));
+	d.erase(d.begin());	
+	for (auto i = unsigned(0); i < d.size(); ++i) {
+		if (i < d_1)
+			--d.at(i);
 	}
-	if (isGraphicHavel(d_prime))
+	if (isGraphicHavel(d))
 		return true;
 	return false;
 }
@@ -36,15 +34,16 @@ std::vector<int> AdjacencyListToPrufer(std::vector<std::vector<int>> adj) {
 		degrees.push_back(degree);	
 	}
 	for (auto i = unsigned(0); i < n - 2; ++i) {
-		unsigned int least_leaf = 0;
+		int least_leaf = 0;
 		while (degrees.at(least_leaf) != 1) {
 			++least_leaf;
 		}
-		prufer.push_back(adj.at(least_leaf).at(0));
+		auto digit = adj.at(least_leaf).at(0);
+		prufer.push_back(digit);
 		--degrees.at(least_leaf);
-		--degrees.at(adj.at(least_leaf).at(0));
-		std::erase(adj.at(adj.at(least_leaf).at(0)), least_leaf);
-		std::erase(adj.at(least_leaf), adj.at(least_leaf).at(0));		
+		--degrees.at(digit);
+		std::erase(adj.at(digit), least_leaf);
+		std::erase(adj.at(least_leaf), digit);		
 	}
 	return prufer;
 }
