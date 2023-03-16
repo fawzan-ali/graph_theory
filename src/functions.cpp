@@ -17,9 +17,7 @@ bool isGraphicHavel(std::vector<int> d) {
 		if (i < d_1)
 			--d.at(i);
 	}
-	if (isGraphicHavel(d))
-		return true;
-	return false;
+	return isGraphicHavel(d);
 }
 
 std::vector<int> AdjacencyListToPrufer(std::vector<std::vector<int>> adj) {
