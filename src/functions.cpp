@@ -20,7 +20,7 @@ bool isGraphicHavel(std::vector<int> d) {
 	return isGraphicHavel(d);
 }
 
-std::vector<int> AdjacencyListToPrufer(std::vector<std::vector<int>> adj) {
+std::vector<int> AdjacencyListToPrufer(std::vector<std::list<int>> adj) {
 	auto n = adj.size();
 	std::vector<int> prufer;
 	std::vector<int> degrees;
@@ -36,7 +36,7 @@ std::vector<int> AdjacencyListToPrufer(std::vector<std::vector<int>> adj) {
 		while (degrees.at(least_leaf) != 1) {
 			++least_leaf;
 		}
-		auto digit = adj.at(least_leaf).at(0);
+		auto digit = adj.at(least_leaf).front();
 		prufer.push_back(digit);
 		--degrees.at(least_leaf);
 		--degrees.at(digit);
@@ -46,9 +46,9 @@ std::vector<int> AdjacencyListToPrufer(std::vector<std::vector<int>> adj) {
 	return prufer;
 }
 
-std::vector<std::vector<int>> PruferToAdjacencyMatrix(std::vector<int> prufer) {
+std::vector<std::list<int>> PruferToAdjacencyList(std::vector<int> prufer) {
 	auto n = prufer.size();
-	std::vector<std::vector<int>> tree(n + 2, std::vector<int>(n + 2, 0));
+	std::vector<std::list<int>> tree(n + 2, std::list<int>());
 	std::vector<int> degrees(n + 2, 1);
 	for (auto i = unsigned(0); i < n; ++i) {
 		++degrees.at(prufer.at(i));
@@ -58,8 +58,8 @@ std::vector<std::vector<int>> PruferToAdjacencyMatrix(std::vector<int> prufer) {
 		while (degrees.at(least_leaf) != 1) {
 			++least_leaf;
 		}
-		tree.at(prufer.at(i)).at(least_leaf) = 1;
-		tree.at(least_leaf).at(prufer.at(i)) = 1;
+		tree.at(prufer.at(i)).push_front(least_leaf);
+		tree.at(least_leaf).push_front(prufer.at(i));
 		--degrees.at(prufer.at(i));
 		--degrees.at(least_leaf);	
 	}
@@ -67,7 +67,7 @@ std::vector<std::vector<int>> PruferToAdjacencyMatrix(std::vector<int> prufer) {
 	while (degrees.at(last_leaf) != 1) {
 		++last_leaf;
 	}
-	tree.at(n + 1).at(last_leaf) = 1;
-	tree.at(last_leaf).at(n + 1) = 1;
+	tree.at(n + 1).push_front(last_leaf);
+	tree.at(last_leaf).push_front(n + 1);
 	return tree;
 }

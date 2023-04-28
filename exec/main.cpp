@@ -17,20 +17,20 @@ int main() {
 //		}
 //		std::cout << std::endl;
 //	}
-	std::vector<int> vec0 = {3};
-	std::vector<int> vec1 = {3};
-	std::vector<int> vec2 = {3};
-	std::vector<int> vec3 = {0,1,2,4};
-	std::vector<int> vec4 = {3,5};
-	std::vector<int> vec5 = {4};
-
-	std::vector<std::vector<int>> adjacency_list = {vec0, vec1, vec2, vec3, vec4, vec5};
-
-	std::vector<int> prufer_code = AdjacencyListToPrufer(adjacency_list);
-
-	for (unsigned int i = 0; i < prufer_code.size(); ++i) {
-		std::cout << prufer_code.at(i) << " ";
-	}
-	std::cout << std::endl;
-	return 0;
+//	std::vector<int> vec0 = {3};
+//	std::vector<int> vec1 = {3};
+//	std::vector<int> vec2 = {3};
+//	std::vector<int> vec3 = {0,1,2,4};
+//	std::vector<int> vec4 = {3,5};
+//	std::vector<int> vec5 = {4};
+//
+//	std::vector<std::vector<int>> adjacency_list = {vec0, vec1, vec2, vec3, vec4, vec5};
+//
+//	std::vector<int> prufer_code = AdjacencyListToPrufer(adjacency_list);
+//
+//	for (unsigned int i = 0; i < prufer_code.size(); ++i) {
+//		std::cout << prufer_code.at(i) << " ";
+//	}
+//	std::cout << std::endl;
+//	return 0;
 }
