@@ -46,7 +46,7 @@ std::vector<int> AdjacencyListToPrufer(std::vector<std::list<int>> adj) {
 	return prufer;
 }
 
-std::vector<std::list<int>> PruferToAdjacencyList(std::vector<int> prufer) {
+std::vector<std::list<int>> PruferToAdjacencyList(const std::vector<int> &prufer) {
 	auto n = prufer.size();
 	std::vector<std::list<int>> tree(n + 2, std::list<int>());
 	std::vector<int> degrees(n + 2, 1);
@@ -70,4 +70,30 @@ std::vector<std::list<int>> PruferToAdjacencyList(std::vector<int> prufer) {
 	tree.at(n + 1).push_front(last_leaf);
 	tree.at(last_leaf).push_front(n + 1);
 	return tree;
+}
+
+std::vector<int> getDegreeSequence(const std::vector<std::list<int>> &adj) {
+	std::vector<int> degrees(adj.size(), 0);
+	for (unsigned int i = 0; i < adj.size(); ++i) {
+		degrees.at(i) = static_cast<int>(adj.at(i).size());
+	}
+	return degrees;
+}
+
+bool hasEvenDegreeForAllVertices(const std::vector<std::list<int>> &adj) {
+	auto degrees = getDegreeSequence(adj);
+	for (unsigned int i = 0; i < degrees.size(); ++i) {
+		if (degrees.at(i) % 2 != 0)
+			return false;
+	}
+	return true;
+}
+
+bool hasAtMostOneNonTrivialComponent(std::vector<std::list<int>> adj) {
+	// todo
+	return true;
+}
+
+bool isEulerian(const std::vector<std::list<int>> &adj) {
+	return (hasEvenDegreeForAllVertices(adj) && hasAtMostOneNonTrivialComponent(adj));
 }
