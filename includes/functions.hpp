@@ -19,7 +19,7 @@ std::vector<int> getDegreeSequence(const std::vector<std::list<int>>&);
 bool hasEvenDegreeForAllVertices(const std::vector<std::list<int>>&);
 
 // returns a vector representing a BFS on a graph
-std::vector<int> BFS(const std::vector<std::list<int>&);
+std::vector<int> BFS(const std::vector<std::list<int>>&);
 
 // returns a vector representing a DFS on a graph
 std::vector<int> DFS(const std::vector<std::list<int>>&);

@@ -22,14 +22,14 @@ bool isGraphicHavel(std::vector<int> d) {
 
 std::vector<int> AdjacencyListToPrufer(std::vector<std::list<int>> adj) {
 	auto n = adj.size();
-	std::vector<int> prufer;
-	std::vector<int> degrees;
+	std::vector<int> prufer(n - 2, 0);
+	std::vector<int> degrees(n, 0);
 	for (auto i = unsigned(0); i < n; ++i) {
 		int degree = 0;
 		for (auto j = unsigned(0); j < adj.at(i).size(); ++j) {
 			++degree;	
 		}
-		degrees.push_back(degree);	
+		degrees.at(i) = degree;	
 	}
 	for (auto i = unsigned(0); i < n - 2; ++i) {
 		int least_leaf = 0;
@@ -37,7 +37,7 @@ std::vector<int> AdjacencyListToPrufer(std::vector<std::list<int>> adj) {
 			++least_leaf;
 		}
 		auto digit = adj.at(least_leaf).front();
-		prufer.push_back(digit);
+		prufer.at(i) = digit;
 		--degrees.at(least_leaf);
 		--degrees.at(digit);
 		std::erase(adj.at(digit), least_leaf);
