@@ -1,6 +1,8 @@
 #include "../includes/functions.hpp"
 
 #include <algorithm>
+#include <queue>
+#include <stack>
 
 bool isGraphicHavel(std::vector<int> d) {
 	if (d.empty())
@@ -89,9 +91,57 @@ bool hasEvenDegreeForAllVertices(const std::vector<std::list<int>> &adj) {
 	return true;
 }
 
-bool hasAtMostOneNonTrivialComponent(std::vector<std::list<int>> adj) {
-	// todo
+void BFS(const std::vector<std::list<int>>& adj, const int& v, std::vector<bool>& visited) {
+	std::queue<int> q;
+	q.push(v);
+	visited.at(v) = true;
+	while (!q.empty()) {
+		auto u = q.front();
+		q.pop();
+		auto neighbors = adj.at(u);
+		for (const auto& w : neighbors) {
+			if (!visited.at(w)) {
+				q.push(w);
+				visited.at(w) = true;
+			}
+		}
+	}
+}
+
+void DFS(const std::vector<std::list<int>>& adj, const int& v, std::vector<bool>& visited) {
+	std::stack<int> s;
+	s.push(v);
+	visited.at(v) = true;
+	while (!s.empty()) {
+		auto u = s.top();
+		s.pop();
+		auto neighbors = adj.at(u);
+		for (const auto& w : neighbors) {
+			if (!visited.at(w)) {
+				s.push(w);
+				visited.at(w) = true;
+			}
+		}
+	}
+}
+
+bool isConnected(const std::vector<std::list<int>>& adj) {
+	std::vector<bool> visited(adj.size());
+	BFS(adj, adj.at(0).front(), visited);
+	for (unsigned i = 0; i < visited.size(); ++i) {
+		if (visited.at(i) == false)
+			return false;
+	}
 	return true;
+}
+
+
+bool hasAtMostOneNonTrivialComponent(std::vector<std::list<int>> adj) {
+	for (unsigned i = 0; i < adj.size(); ++i) {
+		if (adj.at(i).empty()) 
+			adj.erase(adj.begin() + i);
+	}
+	return isConnected(adj);
 }
 
 bool isEulerian(const std::vector<std::list<int>> &adj) {
