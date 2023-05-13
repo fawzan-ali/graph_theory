@@ -25,6 +25,8 @@ bool isGraphicHavel(std::vector<int> d) {
 
 std::vector<int> AdjacencyListToPrufer(std::vector<std::list<int>> adj) {
 	auto n = adj.size();
+	if (n < 2)
+		return std::vector<int>();
 	std::vector<int> prufer(n - 2, 0);
 	std::vector<int> degrees(n, 0);
 	for (auto i = unsigned(0); i < n; ++i) {
