@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <queue>
 #include <stack>
+#include <unordered_map>
 
 bool isGraphicHavel(std::vector<int> d) {
 	if (d.empty())
@@ -126,13 +127,16 @@ void DFS(const std::vector<std::list<int>>& adj, const int& v, std::vector<bool>
 }
 
 bool isConnected(const std::vector<std::list<int>>& adj) {
-	std::vector<bool> visited(adj.size());
-	BFS(adj, adj.at(0).front(), visited);
-	for (unsigned i = 0; i < visited.size(); ++i) {
-		if (visited.at(i) == false)
-			return false;
+	if (!adj.empty()) {
+		std::vector<bool> visited(adj.size());
+		BFS(adj, 0, visited);
+		for (unsigned i = 0; i < visited.size(); ++i) {
+			if (visited.at(i) == false)
+				return false;
+		}
+		return true;
 	}
-	return true;
+	return false;
 }
 
 
@@ -146,4 +150,31 @@ bool hasAtMostOneNonTrivialComponent(std::vector<std::list<int>> adj) {
 
 bool isEulerian(const std::vector<std::list<int>> &adj) {
 	return (hasEvenDegreeForAllVertices(adj) && hasAtMostOneNonTrivialComponent(adj));
+}
+
+std::vector<int> EulerCircuit(std::vector<std::list<int>> adj) {
+	if (isEulerian(adj)) {
+		std::unordered_map<int,int> edge_count;
+		for (unsigned int i = 0; i < adj.size(); ++i)
+			edge_count[i] = adj.at(i).size();
+		std::vector<int> circuit;
+		std::stack<int> curr_path;
+		curr_path.push(0);
+		int curr = 0;
+		while (!curr_path.empty()) {
+			if (edge_count[curr]) {
+				curr_path.push(curr);
+				int next = adj.at(curr).back();
+				edge_count[curr]--;
+				adj.at(curr).pop_back();
+				curr = next;
+			} else {
+				circuit.push_back(curr);
+				curr = curr_path.top();
+				curr_path.pop();
+			}
+		}
+		return circuit;
+	}
+	return std::vector<int>();
 }

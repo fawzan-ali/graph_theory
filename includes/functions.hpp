@@ -32,3 +32,6 @@ bool hasAtMostOneNonTrivialComponent(std::vector<std::list<int>>);
 
 // checks if a given undirected graph has an Euler circuit
 bool isEulerian(const std::vector<std::list<int>>&);
+
+// returns an Euler circuit
+std::vector<int> EulerCircuit(std::vector<std::list<int>>);
