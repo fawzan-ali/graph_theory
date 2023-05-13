@@ -74,4 +74,19 @@ TEST_CASE("PruferToAdj: Random") {
 	std::list<int> r5 = { 4 };
 	std::vector<std::list<int>> solution = { r0, r1, r2, r3, r4, r5 };
 	REQUIRE(result == solution);
-}	
+}
+
+TEST_CASE("Euler Circuit") {
+	std::list<int> r0 = { 1, 2 };
+	std::list<int> r1 = { 0, 2 };
+	std::list<int> r2 = { 0, 1, 3, 4 };
+	std::list<int> r3 = { 2, 4 };
+	std::list<int> r4 = { 2, 3 };
+	std::vector<std::list<int>> test = { r0, r1, r2, r3, r4 };
+	auto result = EulerCircuit(test);
+	std::vector<int> solution = { 0, 1, 2, 3, 4, 2, 0 };
+	REQUIRE(result == solution);
+}
+
+
+

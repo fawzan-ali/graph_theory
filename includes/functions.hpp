@@ -35,3 +35,12 @@ bool isEulerian(const std::vector<std::list<int>>&);
 
 // returns an Euler circuit
 std::vector<int> EulerCircuit(std::vector<std::list<int>>);
+
+// returns minimum spanning tree using Kruskal's algorithm
+std::vector<std::pair<int,int>> Kruskal(const std::vector<std::list<int>>&);
+
+// returns minimum spanning tree using Prim's algorithm
+std::vector<std::pair<int,int>> Prim(const std::vector<std::list<int>>&);
+
+// returns a vector of distances from starting node
+std::vector<int> Djikstra(const std::vector<std::list<std::pair<int, int>>>&, const int&);

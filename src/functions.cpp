@@ -1,6 +1,7 @@
 #include "../includes/functions.hpp"
 
 #include <algorithm>
+#include <limits>
 #include <queue>
 #include <stack>
 #include <unordered_map>
@@ -167,7 +168,9 @@ std::vector<int> EulerCircuit(std::vector<std::list<int>> adj) {
 			if (edge_count[curr]) {
 				curr_path.push(curr);
 				int next = adj.at(curr).back();
+				std::erase(adj.at(next), curr);
 				edge_count[curr]--;
+				edge_count[next]--;
 				adj.at(curr).pop_back();
 				curr = next;
 			} else {
@@ -179,4 +182,25 @@ std::vector<int> EulerCircuit(std::vector<std::list<int>> adj) {
 		return circuit;
 	}
 	return std::vector<int>();
+}
+
+std::vector<int> Djikstra(const std::vector<std::list<std::pair<int, int>>>& adj, const int& v) {
+	std::priority_queue<std::pair<int, int>> pq;
+	std::vector<int> dist(adj.size(), std::numeric_limits<int>::max());
+	pq.push(std::make_pair(0, v));
+	dist.at(v) = 0;
+	while (!pq.empty()) {
+		auto u = pq.top().second;
+		pq.pop();
+		auto neighbors = adj.at(u);
+		for (auto i = neighbors.begin(); i != neighbors.end(); ++i) {
+			auto weight = i->first;
+			auto w = i->second;
+			if (dist.at(u) + weight < dist.at(w)) {
+				dist.at(w) = dist.at(u) + weight;
+				pq.push(std::make_pair((-1) * dist.at(w), w)); 
+			}
+		}
+	}
+	return dist;	
 }
