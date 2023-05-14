@@ -184,7 +184,23 @@ std::vector<int> EulerCircuit(std::vector<std::list<int>> adj) {
 	return std::vector<int>();
 }
 
-std::vector<int> Djikstra(const std::vector<std::list<std::pair<int, int>>>& adj, const int& v) {
+std::vector<std::pair<int,int>> getEdges(std::vector<std::list<int>> adj) {
+	std::vector<std::pair<int,int>> edges;
+	for (unsigned int i = 0; i < adj.size(); ++i) {
+		auto neighbors = adj.at(i);
+		for (const auto& w : neighbors) {
+			edges.push_back(std::make_pair(i, w));
+			std::erase(adj.at(w), i);
+		}
+	}
+	return edges;
+}
+
+std::vector<std::pair<int,int>> Prim(const std::vector<std::list<std::pair<int,int>>>& adj) {
+	
+}
+
+std::vector<int> Djikstra(const std::vector<std::list<std::pair<int,int>>>& adj, const int& v) {
 	std::priority_queue<std::pair<int, int>> pq;
 	std::vector<int> dist(adj.size(), std::numeric_limits<int>::max());
 	pq.push(std::make_pair(0, v));

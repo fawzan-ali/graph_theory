@@ -102,5 +102,26 @@ TEST_CASE("Euler Circuit 2") {
 	REQUIRE(result == solution);
 }
 
-
-
+TEST_CASE("getEdges 1") {	
+	std::list<int> r0 = { 1, 2, 5, 6 };
+	std::list<int> r1 = { 0, 2 };
+	std::list<int> r2 = { 0, 1, 3, 4 };
+	std::list<int> r3 = { 2, 4 };
+	std::list<int> r4 = { 2, 3, 5, 6 };
+	std::list<int> r5 = { 0, 4 };
+	std::list<int> r6 = { 0, 4 };
+	std::vector<std::list<int>> test = { r0, r1, r2, r3, r4, r5, r6 };
+	auto result = getEdges(test);
+	std::pair<int,int> p0 = { 0, 1 };
+	std::pair<int,int> p1 = { 0, 2 };
+	std::pair<int,int> p2 = { 0, 5 };
+	std::pair<int,int> p3 = { 0, 6 };
+	std::pair<int,int> p4 = { 1, 2 };
+	std::pair<int,int> p5 = { 2, 3 };
+	std::pair<int,int> p6 = { 2, 4 };
+	std::pair<int,int> p7 = { 3, 4 };
+	std::pair<int,int> p8 = { 4, 5 };
+	std::pair<int,int> p9 = { 4, 6 };
+	std::vector<std::pair<int,int>> solution = { p0, p1, p2, p3, p4, p5, p6, p7, p8, p9 };
+	REQUIRE(result == solution);
+}

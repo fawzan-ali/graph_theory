@@ -36,6 +36,9 @@ bool isEulerian(const std::vector<std::list<int>>&);
 // returns an Euler circuit
 std::vector<int> EulerCircuit(std::vector<std::list<int>>);
 
+// returns the edges of a graph
+std::vector<std::pair<int,int>> getEdges(std::vector<std::list<int>>);
+
 // returns minimum spanning tree using Kruskal's algorithm
 std::vector<std::pair<int,int>> Kruskal(const std::vector<std::list<int>>&);
 
