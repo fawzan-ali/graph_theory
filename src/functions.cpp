@@ -168,10 +168,10 @@ std::vector<int> EulerCircuit(std::vector<std::list<int>> adj) {
 			if (edge_count[curr]) {
 				curr_path.push(curr);
 				int next = adj.at(curr).back();
+				adj.at(curr).pop_back();
 				std::erase(adj.at(next), curr);
 				edge_count[curr]--;
 				edge_count[next]--;
-				adj.at(curr).pop_back();
 				curr = next;
 			} else {
 				circuit.push_back(curr);
